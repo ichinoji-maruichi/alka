@@ -131,6 +131,11 @@ code { font-family: 'Menlo', 'Consolas', monospace; font-size: 12px; background:
 .ss-strip { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; margin: 32px 0 48px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 .ss-strip img { height: 180px; width: auto; border-radius: var(--radius); border: 1px solid var(--border); flex-shrink: 0; object-fit: cover; }
 @media (max-width: 600px) { .ss-strip img { height: 120px; } }
+/* ライトボックス */
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; cursor: zoom-out; }
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 90vw; max-height: 90vh; border-radius: var(--radius); object-fit: contain; box-shadow: 0 8px 40px rgba(0,0,0,0.6); }
+.lightbox-close { position: fixed; top: 20px; right: 28px; color: #fff; font-size: 32px; cursor: pointer; line-height: 1; user-select: none; }
 @media (max-width: 600px) { .sample-card-inner { flex-direction: column; align-items: flex-start; } }
 
 @media (max-width: 600px) {
@@ -164,18 +169,24 @@ code { font-family: 'Menlo', 'Consolas', monospace; font-size: 12px; background:
 
   <!-- スクリーンショット -->
   <div class="ss-strip">
-    <img src="images/alka_ss01.png" alt="スクリーンショット1">
-    <img src="images/alka_ss02.png" alt="スクリーンショット2">
-    <img src="images/alka_ss03.png" alt="スクリーンショット3">
-    <img src="images/alka_ss04.png" alt="スクリーンショット4">
-    <img src="images/alka_ss05.png" alt="スクリーンショット5">
-    <img src="images/alka_ss06.png" alt="スクリーンショット6">
-    <img src="images/alka_ss07.png" alt="スクリーンショット7">
-    <img src="images/alka_ss08.png" alt="スクリーンショット8">
-    <img src="images/alka_ss09.png" alt="スクリーンショット9">
-    <img src="images/alka_ss10.png" alt="スクリーンショット10">
-    <img src="images/alka_ss11.png" alt="スクリーンショット11">
-    <img src="images/alka_ss12.png" alt="スクリーンショット12">
+    <img src="images/alka_ss01.png" alt="スクリーンショット1" class="ss-thumb">
+    <img src="images/alka_ss02.png" alt="スクリーンショット2" class="ss-thumb">
+    <img src="images/alka_ss03.png" alt="スクリーンショット3" class="ss-thumb">
+    <img src="images/alka_ss04.png" alt="スクリーンショット4" class="ss-thumb">
+    <img src="images/alka_ss05.png" alt="スクリーンショット5" class="ss-thumb">
+    <img src="images/alka_ss06.png" alt="スクリーンショット6" class="ss-thumb">
+    <img src="images/alka_ss07.png" alt="スクリーンショット7" class="ss-thumb">
+    <img src="images/alka_ss08.png" alt="スクリーンショット8" class="ss-thumb">
+    <img src="images/alka_ss09.png" alt="スクリーンショット9" class="ss-thumb">
+    <img src="images/alka_ss10.png" alt="スクリーンショット10" class="ss-thumb">
+    <img src="images/alka_ss11.png" alt="スクリーンショット11" class="ss-thumb">
+    <img src="images/alka_ss12.png" alt="スクリーンショット12" class="ss-thumb">
+  </div>
+
+  <!-- ライトボックス -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightbox-close">✕</span>
+    <img id="lightbox-img" src="" alt="">
   </div>
 
   <!-- TOC -->
@@ -513,5 +524,23 @@ code { font-family: 'Menlo', 'Consolas', monospace; font-size: 12px; background:
   </footer>
 
 </div>
+<script>
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+document.querySelectorAll('.ss-thumb').forEach(img => {
+  img.style.cursor = 'zoom-in';
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('active');
+  });
+});
+
+function closeLightbox() { lightbox.classList.remove('active'); }
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
 </body>
 </html>
