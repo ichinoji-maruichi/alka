@@ -123,6 +123,12 @@ code { font-family: 'Menlo', 'Consolas', monospace; font-size: 12px; background:
 }
 .dl-btn:hover { background: var(--purple-dark); }
 
+/* サンプルデータカード */
+.sample-card-inner { display: flex; align-items: center; gap: 20px; }
+.sample-card-info { flex: 1; }
+.sample-card-info ul { margin: 6px 0 12px; padding-left: 1.2em; font-size: 14px; color: var(--text-sub); line-height: 1.8; }
+@media (max-width: 600px) { .sample-card-inner { flex-direction: column; align-items: flex-start; } }
+
 @media (max-width: 600px) {
   .hero h1 { font-size: 26px; }
   .toc ol { grid-template-columns: 1fr; }
@@ -158,6 +164,7 @@ code { font-family: 'Menlo', 'Consolas', monospace; font-size: 12px; background:
     <ol>
       <li><a href="#requirements">動作環境・注意事項</a></li>
       <li><a href="#download">ダウンロード</a></li>
+      <li><a href="#sample-data">サンプルデータ</a></li>
       <li><a href="#features">主な機能</a></li>
       <li><a href="#api-setup">Gemini API キーの設定</a></li>
       <li><a href="#licenses">ライセンス</a></li>
@@ -260,7 +267,38 @@ code { font-family: 'Menlo', 'Consolas', monospace; font-size: 12px; background:
     </div>
   </section>
 
-  <!-- 3. 機能紹介 -->
+  <!-- 3. サンプルデータ -->
+  <section id="sample-data">
+    <p class="section-eyebrow">Sample Data</p>
+    <h2>サンプルデータ</h2>
+    <p>ツールをすぐに使い始められるサンプルデータを配布しています。設定画面のインポート機能から読み込むことができます。</p>
+
+    <div class="card">
+      <div class="sample-card-inner">
+        <img src="icons/aila_sample.png" alt="プロンプちゃん" style="width:72px; height:72px; border-radius:50%; flex-shrink:0; object-fit:cover;">
+        <div class="sample-card-info">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+            <div>
+              <p class="card-title" style="font-size:15px; color:var(--text); margin-bottom:2px;">サンプルデータパック</p>
+              <ul>
+                <li>サンプルマスコット「プロンプちゃん」</li>
+                <li>サンプル辞書データ（約4,300語）</li>
+              </ul>
+            </div>
+            <a class="dl-btn" style="margin-top:0; white-space:nowrap; flex-shrink:0;" href="https://github.com/ichinoji-maruichi/alka/releases/latest/download/alka_sample_data.zip" download>サンプルデータをダウンロード (.zip)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout info" style="margin-top:16px;">
+      <span class="callout-icon">📖</span>
+      <div>インポート方法はアプリ内の「マニュアル / このソフトについて」をご参照ください。<br>
+      マスコットデータは設定画面「プロファイル管理」→「JSONインポート」、辞書データは設定画面「辞書データベース」→「CSVインポート」から読み込めます。</div>
+    </div>
+  </section>
+
+  <!-- 4. 機能紹介 -->
   <section id="features">
     <p class="section-eyebrow">Features</p>
     <h2>主な機能</h2>
